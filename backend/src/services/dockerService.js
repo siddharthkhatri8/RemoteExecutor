@@ -2,7 +2,7 @@ const Docker = require("dockerode");
 
 const docker = new Docker();
 
-const executeCode = async (language, code) => {
+const executeCode = async (language, code, input = "") => {
   const commands = {
     javascript: {
       file: "main.js",
@@ -37,13 +37,16 @@ const executeCode = async (language, code) => {
     throw new Error("Code is required");
   }
 
-  // Prevent excessively large submissions.
   if (Buffer.byteLength(code, "utf8") > 100 * 1024) {
     throw new Error("Code exceeds the 100 KB limit");
   }
 
-  // Encode source safely before passing it to the shell.
+  if (Buffer.byteLength(input, "utf8") > 50 * 1024) {
+    throw new Error("Input exceeds the 50 KB limit");
+  }
+
   const encodedCode = Buffer.from(code, "utf8").toString("base64");
+  const encodedInput = Buffer.from(input, "utf8").toString("base64");
 
   const container = await docker.createContainer({
     Image: "remote-executor-image",
@@ -51,7 +54,12 @@ const executeCode = async (language, code) => {
     Cmd: [
       "sh",
       "-c",
-      `mkdir -p /workspace && echo '${encodedCode}' | base64 -d > /workspace/${config.file} && ${config.command}`,
+      `
+      mkdir -p /workspace &&
+      echo '${encodedCode}' | base64 -d > /workspace/${config.file} &&
+      echo '${encodedInput}' | base64 -d > /workspace/input.txt &&
+      ${config.command} < /workspace/input.txt
+      `,
     ],
 
     WorkingDir: "/workspace",
@@ -65,17 +73,18 @@ const executeCode = async (language, code) => {
   });
 
   let timedOut = false;
+  let timeout;
 
   try {
     await container.start();
 
-    const timeout = setTimeout(async () => {
+    timeout = setTimeout(async () => {
       timedOut = true;
 
       try {
         await container.kill();
       } catch (error) {
-        // Container may have already exited.
+        // Container may already have exited.
       }
     }, 5000);
 
@@ -88,6 +97,8 @@ const executeCode = async (language, code) => {
       stderr: true,
     });
 
+    const output = logs.toString();
+
     if (timedOut) {
       return {
         output: "Execution timed out after 5 seconds.",
@@ -96,10 +107,14 @@ const executeCode = async (language, code) => {
     }
 
     return {
-      output: logs.toString(),
+      output,
       exitCode: result.StatusCode,
     };
   } finally {
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
     try {
       await container.remove({
         force: true,

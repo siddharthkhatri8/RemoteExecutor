@@ -102,10 +102,10 @@ const ProblemDetails = () => {
 
           <div className="mt-10">
             <Link
-              to="/editor"
-              className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
-            >
-              Open Editor
+            to={`/editor/${problem._id}`}
+            className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white hover:bg-blue-700"
+>
+  Open Editor
             </Link>
           </div>
         </div>
