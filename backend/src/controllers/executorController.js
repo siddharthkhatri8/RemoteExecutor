@@ -2,7 +2,7 @@ const { executeCode } = require("../services/dockerService");
 
 const runCode = async (req, res) => {
   try {
-    const { language, code } = req.body;
+    const { language, code, input } = req.body;
 
     if (!language || !code) {
       return res.status(400).json({
@@ -10,7 +10,11 @@ const runCode = async (req, res) => {
       });
     }
 
-    const result = await executeCode(language, code);
+    const result = await executeCode(
+      language,
+      code,
+      input || ""
+    );
 
     res.json(result);
   } catch (error) {
