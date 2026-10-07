@@ -7,6 +7,7 @@ import Signup from "./pages/Signup";
 import Problems from "./pages/Problems";
 import ProblemDetails from "./pages/ProblemDetails";
 import EditorPage from "./pages/Editor";
+import Submissions from "./pages/Submissions";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
           <Route path="/editor/:problemId" element={<EditorPage />} />
           <Route path="/problems" element={<Problems />} />
           <Route path="/problems/:id" element={<ProblemDetails />} />
+          <Route
+            path="/submissions"
+            element={<Submissions />}
+          />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

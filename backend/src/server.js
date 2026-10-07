@@ -6,7 +6,7 @@ const connectDatabase = require("./config/database");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const executorRoutes = require("./routes/executorRoutes");
-
+const submissionRoutes = require("./routes/submissionRoutes");
 
 const app = express();
 
@@ -41,5 +41,5 @@ const startServer = async () => {
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/executor", executorRoutes);
-
+app.use("/api/submissions", submissionRoutes);
 startServer();

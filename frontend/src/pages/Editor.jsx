@@ -159,6 +159,41 @@ const runTestCases = async () => {
     setRunning(false);
   }
 };
+
+const submitCode = async () => {
+  if (!problem) {
+    setOutput("Open the editor from a problem first.");
+    return;
+  }
+
+  try {
+    setRunning(true);
+    setOutput("Submitting...");
+
+    const response = await api.post("/api/submissions", {
+      problemId: problem._id,
+      language,
+      code,
+    });
+
+    const submission = response.data.submission;
+
+    setOutput(
+      `${submission.status}\n\n` +
+      `Tests Passed: ${submission.passedTests}/${submission.totalTests}`
+    );
+  } catch (error) {
+    console.error(error);
+
+    setOutput(
+      error.response?.data?.message ||
+        "Submission failed."
+    );
+  } finally {
+    setRunning(false);
+  }
+};
+
   if (loadingProblem) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -208,6 +243,14 @@ const runTestCases = async () => {
             className="rounded bg-blue-600 px-5 py-2 font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {running ? "Testing..." : "Test Cases"}
+          </button>
+
+          <button
+            onClick={submitCode}
+            disabled={running || !problem}
+            className="rounded bg-purple-600 px-5 py-2 font-semibold text-white hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {running ? "Submitting..." : "Submit"}
           </button>
         </div>
       </div>
