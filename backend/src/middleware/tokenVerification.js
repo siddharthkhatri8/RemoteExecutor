@@ -1,31 +1,48 @@
-import { createError, errorHandler } from "../utils/errorHandler.js";
-import { verifyToken } from "../utils/JWTUtilities.js";
+import { Schema, model } from "mongoose";
+import { createError } from "../utils/errorHandler.js";
 
-export const tokenVerification = async (req, res, next) => {
+const User = model(
+    "User",
+    new Schema({
+        username: String,
+        email: { type: String, required: true, unique: true },
+        password: { type: String, required: true },
+    })
+);
+
+export const findUser = async (userObject) => {
     try {
-        const authHeader = req.headers.authorization;
-        if (!authHeader) {
-            throw createError(
-                "Please Logged in before using this service",
-                403
-            );
+        const user = await User.findOne({ email: userObject.email });
+        if (user == null) {
+            throw 404;
         }
-        // Bearer <token>
-        const token = authHeader.split(" ")[1];
-        if (token.length === 0) {
-            throw createError(
-                "Please Logged in before using this service",
-                403
-            );
-        }
-        // Token verification
-        const verificationStatus = await verifyToken(token);
-        if (!verificationStatus.success) {
-            throw createError("Invalid Token", 403);
-        }
-        req.user = verificationStatus.data;
-        next();
+        return user;
     } catch (error) {
-        errorHandler(res, error);
+        console.error("Error finding user: ", error);
+        if (error === 404) {
+            throw createError(`User Not Found`, 404);
+        } else {
+            throw createError(error.message);
+        }
+    }
+};
+
+export const createUser = async (userObject) => {
+    try {
+        const user = new User(userObject);
+        const preExistingUserNameCheck = await User.findOne({ username: userObject.username });
+        const preExistingEmailCheck = await User.findOne({ email: userObject.email });
+        if(preExistingUserNameCheck || preExistingEmailCheck){
+            throw {errorResponse:{code:11000}};
+        }
+        await user.save();
+        return user;
+    } catch (error) {
+        console.error("Error creating user: ", error);
+        if (error.errorResponse?.code === 11000) {
+            throw createError(`User Already Exists`, 409);
+        } else {
+            throw createError(error.message);
+        }
     }
 };
