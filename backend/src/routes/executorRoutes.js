@@ -1,8 +1,9 @@
-const express = require("express");
-const { runCode } = require("../controllers/executorController");
+import { Router } from "express";
+import { codeReciver } from "../controllers/executor.controller.js";
+import { tokenVerification } from "../middlewares/tokenVerification.js";
 
-const router = express.Router();
+const router = Router();
 
-router.post("/run", runCode);
+router.route("/").post(tokenVerification, codeReciver);
 
-module.exports = router;
+export default router;
