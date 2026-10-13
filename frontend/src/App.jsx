@@ -8,6 +8,7 @@ import Problems from "./pages/Problems";
 import ProblemDetails from "./pages/ProblemDetails";
 import EditorPage from "./pages/Editor";
 import Submissions from "./pages/Submissions";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             path="/submissions"
             element={<Submissions />}
           />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
