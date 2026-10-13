@@ -1,85 +1,138 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import api from "../services/api";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import Axios from "axios";
+import { BASE_URL } from "../constants.js";
 
-const Problems = () => {
-  const [problems, setProblems] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+// complete the use Effect API code
 
-  useEffect(() => {
-    const fetchProblems = async () => {
-      try {
-        const response = await api.get("/api/problems");
-        setProblems(response.data);
-      } catch (error) {
-        console.error(error);
-        setError("Failed to load problems");
-      } finally {
-        setLoading(false);
-      }
-    };
+const Problem = () => {
+    const redirect = useNavigate();
+    const { id } = useParams();
+    const [problemData, setProblemData] = useState(null);
+    const URI = `${BASE_URL}/problem/${id}`;
 
-    fetchProblems();
-  }, []);
+    useEffect(() => {
+        Axios({ url: URI })
+            .then((data) => {
+                // here we assuming that whatever the condition is if "data" exists then "data.data" will also exist.
+                setProblemData(data.data);
+            })
+            .catch((err) => {
+                console.log("ProblemError: ", err);
+                redirect("/pagenotfound");
+            });
+    }, [id, URI]);
 
-  if (loading) {
-    return <div className="p-8">Loading problems...</div>;
-  }
+    return (
+        <>
+            {problemData ? (
+                <div className="w-full flex flex-col justify-evenly my-5">
+                    <div className="text-2xl font-semibold mb-4">
+                        {id}. {problemData.title}
+                    </div>
+                    <div className="mb-8">
+                        {problemData.description.paragraphs.length > 0 &&
+                            problemData.description.paragraphs.map(
+                                (item, i) => {
+                                    return (
+                                        <p key={i} className="mb-4">
+                                            {item}
+                                        </p>
+                                    );
+                                }
+                            )}
+                        {problemData.description.images.length > 0 &&
+                            problemData.description.images.map((item, i) => {
+                                return (
+                                    <img
+                                        className="mb-2"
+                                        src={item}
+                                        key={i}
+                                        alt="Problem helping Image"
+                                    />
+                                );
+                            })}
+                    </div>
+                    <div className="mb-8">
+                        {problemData.description.examples.length > 0 &&
+                            problemData.description.examples.map((item, i) => {
+                                return (
+                                    <div key={i} className="mb-4">
+                                        <h3 className="mb-4">
+                                            <b>Example {i + 1}:</b>
+                                        </h3>
+                                        {item.images?.length > 0 &&
+                                            item.images.map((images, j) => {
+                                                return (
+                                                    <img
+                                                        className="mb-4"
+                                                        key={j}
+                                                        src={images}
+                                                        alt="Example helping Image"
+                                                    />
+                                                );
+                                            })}
+                                        <div className="px-5 border-l-2 border-gray-200">
+                                            <h3>
+                                                <b className="mr-2">Input: </b>
+                                                <span className=" font-light text-gray-600 ">
+                                                    {item.input}
+                                                </span>
+                                            </h3>
+                                            <h3>
+                                                <b className="mr-2">Output: </b>
+                                                <span className=" font-light text-gray-600 ">
+                                                    {item.output}
+                                                </span>
+                                            </h3>
+                                            {item.explanation ? (
+                                                <h3>
+                                                    <b className="mr-2">
+                                                        Explanation:{" "}
+                                                    </b>
+                                                    <span className=" font-light text-gray-600 ">
+                                                        {item.explanation}
+                                                    </span>
+                                                </h3>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                    </div>
 
-  if (error) {
-    return <div className="p-8 text-red-500">{error}</div>;
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="mx-auto max-w-5xl">
-        <h1 className="mb-2 text-3xl font-bold">Problems</h1>
-
-        <p className="mb-8 text-gray-600">
-          Practice coding problems and improve your programming skills.
-        </p>
-
-        {problems.length === 0 ? (
-          <div className="rounded-lg bg-white p-6 shadow">
-            No problems available yet.
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {problems.map((problem) => (
-              <Link
-                key={problem._id}
-                to={`/problems/${problem._id}`}
-                className="block rounded-lg bg-white p-6 shadow transition hover:shadow-md"
-              >
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold">
-                    {problem.title}
-                  </h2>
-
-                  <span
-                    className={`rounded-full px-3 py-1 text-sm ${
-                      problem.difficulty === "Easy"
-                        ? "bg-green-100 text-green-700"
-                        : problem.difficulty === "Medium"
-                        ? "bg-yellow-100 text-yellow-700"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {problem.difficulty}
-                  </span>
+                    {problemData.description.constraints.length > 0 && (
+                        <div className="mb-4">
+                            <h3 className="mb-4">
+                                <b>Constraints:</b>
+                            </h3>
+                            <ul className="list-disc list-inside">
+                                {problemData.description.constraints.map(
+                                    (item, i) => {
+                                        return (
+                                            <li key={i} className="mb-2">
+                                                {item}
+                                            </li>
+                                        );
+                                    }
+                                )}
+                            </ul>
+                        </div>
+                    )}
+                    <Link
+                        to="/terminal"
+                        className="my-5 w-fit mx-auto text-white bg-gradient-to-bl from-slate-500 to-slate-800 py-3 px-12 rounded-md"
+                    >
+                        Solve
+                    </Link>
                 </div>
-
-                <p className="mt-2 text-gray-600">
-                  {problem.description}
-                </p>
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
+            ) : (
+                <div className="contentloader">
+                    <img src="/Design.png" alt="Remote Executer Logo" />
+                </div>
+            )}
+        </>
+    );
 };
 
-export default Problems;
+export default Problem;
