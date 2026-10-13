@@ -1,31 +1,12 @@
-const { executeCode } = require("../services/dockerService");
+import { errorHandler } from "../utils/errorHandler.js";
+import { Executor } from "../services/CodeExecutionService.js";
 
-const runCode = async (req, res) => {
-  try {
-    const { language, code, input } = req.body;
-
-    if (!language || !code) {
-      return res.status(400).json({
-        message: "Language and code are required",
-      });
+export const codeReciver = async (req, res, next) => {
+    try {
+        const { code, input, language, user } = req.body;
+        const output = await Executor.exe(code, input, language, user);
+        res.json(output);
+    } catch (error) {
+        errorHandler(res, error);
     }
-
-    const result = await executeCode(
-      language,
-      code,
-      input || ""
-    );
-
-    res.json(result);
-  } catch (error) {
-    console.error("Execution error:", error);
-
-    res.status(500).json({
-      message: error.message || "Code execution failed",
-    });
-  }
-};
-
-module.exports = {
-  runCode,
 };
