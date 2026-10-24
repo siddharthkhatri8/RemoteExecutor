@@ -1,57 +1,38 @@
-import { createContext, useContext, useState } from "react";
-import api from "../services/api";
+import { createContext, useState, useContext } from "react";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
+const AuthContextProvider = ({ children }) => {
+    // Make login, register, Token verification logic
+    const [token, sT] = useState(localStorage.getItem("token") || "");
+    const [user, sU] = useState(null);
 
-  const signup = async (name, email, password) => {
-    const response = await api.post("/api/auth/signup", {
-      name,
-      email,
-      password,
-    });
+    const logOut = () => {
+        sT("");
+        localStorage.removeItem("token");
+        sU(null);
+        localStorage.removeItem("user");
+    };
+    const setToken = (newToken) => {
+        sT(newToken);
+        localStorage.setItem("token", newToken);
+    };
+    const setUser = (newUser) => {
+        sU(newUser);
+        localStorage.setItem("user", newUser);
+    };
 
-    return response.data;
-  };
-
-  const login = async (email, password) => {
-    const response = await api.post("/api/auth/login", {
-      email,
-      password,
-    });
-
-    const { token, user } = response.data;
-
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
-
-    setUser(user);
-
-    return response.data;
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
-  };
-
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        signup,
-        login,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
+    return (
+        <AuthContext.Provider
+            value={{ token, setToken, user, setUser, logOut }}
+        >
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
-export const useAuth = () => useContext(AuthContext);
+export default AuthContextProvider;
+
+export const useAuth = () => {
+    return useContext(AuthContext);
+};

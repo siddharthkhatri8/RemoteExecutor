@@ -1,13 +1,45 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/png" href="public/Design.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Remote Executor</title>
+
+        <!-- Styles Just for Loader -->
+        <style>
+            .contentloader {
+                height: 100vh;
+                width: 100%;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .contentloader img {
+                padding: 2rem;
+                width: 10%;
+                animation-name: loaderSpin;
+                animation-duration: 1s;
+                animation-iteration-count: infinite;
+            }
+            @keyframes loaderSpin {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="root">
+            <!-- The Screen Loader -->
+            <div class="contentloader">
+                <img src="./public/Design.png" alt="Remote Executer Logo" />
+            </div>
+        </div>
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
 </html>
