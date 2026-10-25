@@ -1,36 +1,22 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import { AuthProvider } from "./contexts/authContext.jsx";
-import Home from "./Pages/Home";
-import Login from "./Pages/LogIn";
-import Signup from "./Pages/SignUp";
-import Problems from "./Pages/Problems";
-import ProblemDetails from "./Pages/ProblemDetails";
-import EditorPage from "./Pages/Editor";
-import Submissions from "./Pages/Submissions";
-import Dashboard from "./Pages/Dashboard";
+import Navbar from "./components/Navbar";
+import MainBody from "./components/MainBody";
+import { useAuth } from "./contexts/authContext.jsx";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/editor" element={<EditorPage />} />
-          <Route path="/editor/:problemId" element={<EditorPage />} />
-          <Route path="/problems" element={<Problems />} />
-          <Route path="/problems/:id" element={<ProblemDetails />} />
-          <Route
-            path="/submissions"
-            element={<Submissions />}
-          />
-          <Route path="/dashboard" element={<Dashboard />} />
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
-  );
+    // remove this is something related to Auth breaks
+    const { token, user, setToken, setUser } = useAuth();
+    if (!token && localStorage.getItem("token")) {
+        setToken(localStorage.getItem("token"));
+    }
+    if (!user && localStorage.getItem("user")) {
+        setUser(localStorage.getItem("user"));
+    }
+    return (
+        <div className="flex flex-col h-screen w-full ">
+            <Navbar />
+            <MainBody />
+        </div>
+    );
 }
 
 export default App;
