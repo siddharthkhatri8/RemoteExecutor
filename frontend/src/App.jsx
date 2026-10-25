@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { AuthProvider } from "./context/AuthContext";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Problems from "./pages/Problems";
-import ProblemDetails from "./pages/ProblemDetails";
-import EditorPage from "./pages/Editor";
-import Submissions from "./pages/Submissions";
-import Dashboard from "./pages/Dashboard";
+import { AuthProvider } from "./contexts/authContext.jsx";
+import Home from "./Pages/Home";
+import Login from "./Pages/LogIn";
+import Signup from "./Pages/SignUp";
+import Problems from "./Pages/Problems";
+import ProblemDetails from "./Pages/ProblemDetails";
+import EditorPage from "./Pages/Editor";
+import Submissions from "./Pages/Submissions";
+import Dashboard from "./Pages/Dashboard";
 
 function App() {
   return (

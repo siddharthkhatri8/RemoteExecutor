@@ -2,8 +2,8 @@ import { useSearchParams } from "react-router-dom";
 import {
     FilterButton,
     ChangePageButton,
-} from "../components/PracticePageButtons";
-import QuestionRow from "../components/QuestionRow";
+} from "../components/PracticePageButtons.jsx";
+import QuestionRow from "../components/QuestionRow.jsx";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../constants.js";

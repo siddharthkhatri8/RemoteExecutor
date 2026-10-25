@@ -1,0 +1,118 @@
+[
+    {
+        "courseName": "Chai aur Javascript",
+        "link": "https://www.youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+        "chapters": 51,
+        "thumbnail": "https://i.ytimg.com/vi/Hr5iLG7sUa0/hqdefault.jpg?sqp=-oaymwEjCNACELwBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLDLoKvnXHFWBiQ62EyKv82Enfjxyw",
+        "courseDescription": [
+            "Chai aur Javascript is a standout online series that masterfully breaks down the fundamentals of JavaScript programming for beginners, all in accessible Hindi language. ",
+            "What sets this series apart is its unprecedented depth and comprehensiveness, unparalleled even by paid courses in the market. In this series, I will guide you step-by-step, ensuring even complex concepts become digestible. From basic syntax to advanced concepts, object-oriented programming, and web development essentials, this series leaves no stone unturned. ",
+            "Perfect for individuals with little to no prior experience, 'Chai aur Javascript' is a comprehensive, easy-to-follow guide that promises to turn even absolute beginners into competent JavaScript developers."
+        ]
+    },
+    {
+        "courseName": "C++ A complete and modern course",
+        "link": "https://www.youtube.com/watch?v=FpfHmAkRVK4",
+        "chapters": 1,
+        "thumbnail": "https://i.ytimg.com/vi/FpfHmAkRVK4/maxresdefault.jpg",
+        "courseDescription": [
+            "This is a data structures and algorithms (DSA) course with a strong focus on passing coding interviews for software engineering jobs.",
+            "Most DSA courses - including those offered in universities, tend to concentrate on theoretical concepts that don't matter in an interview. Most of the time, these courses present zero or few examples of problems you would see in an interview.",
+            "This course takes a very pragmatic approach to teaching DSA. The course is primarily taught through examples - it includes hundreds of carefully curated problems that show up in actual interviews. These examples are delivered through a balanced mix of walkthroughs and exercises. You will learn by doing.",
+            "Everything you need to pass coding interviews is here in one place. We will not dwell on theoretical details or waste time on concepts that won't help you pass an interview. The goal of this course is to get you a job, not pass an exam.",
+            "Regardless of your initial skill level, you should be comfortable with preparing for and passing coding interviews at tech companies after taking this course. If your target is top-tier companies like FAANG, taking this course will set you up with all the fundamentals necessary to prepare for those interviews.",
+            "The course is split up into 13 chapters. The bulk of the content is within chapters 2 - 11, each of which focuses on a data structure or algorithm - Arrays and strings - Hashmaps and sets - Linked lists - Stacks and queues - Trees and graphs - Heaps - Greedy algorithms - Binary search - Backtracking - Dynamic programming"
+        ]
+    },
+    {
+        "courseName": "Chai aur React",
+        "link": "https://www.youtube.com/playlist?list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+        "chapters": 34,
+        "thumbnail": "https://i.ytimg.com/vi/vz1RlUyrc3w/maxresdefault.jpg",
+        "courseDescription": [
+            "React is a JavaScript library for rendering user interfaces (UI). UI is built from small units like buttons, text, and images. React lets you combine them into reusable, nestable components. From web sites to phone apps, everything on the screen can be broken down into components. In this chapter, you will learn to create, customize, and conditionally display React components.",
+            "This course includes React's deep under the hood concepts like All hooks and How it works virtual dom fiber and many more."
+        ]
+    },
+    {
+        "courseName": "Complete Git & GitHub Tutorial",
+        "link": "https://www.youtube.com/watch?v=apGV9Kg7ics",
+        "chapters": 1,
+        "thumbnail": "https://i.ytimg.com/vi/apGV9Kg7ics/maxresdefault.jpg",
+        "courseDescription": [
+            "This tutorial will help you with using Git & GitHub for your personal projects and contributing to Open Source, with no prerequisites, in an easy to understand language.",
+
+            "It starts from the very basics of Git & GitHub, covering all the essential commands, including concepts such as branching, pull requests, forking, etc. We also cover other concepts such as squashing, resolving merge conflicts, keeping your code in sync, and more.",
+
+            "NOTE:",
+            "- Windows users can use git bash, all the commands will work.",
+            "- When using git for the first time, set the global configs using the commands:",
+            "$ git config --global user.name <your_name>",
+            "$ git config --global user.email <your_email>",
+
+            "Git/GitHub cheat sheet: 'https://education.github.com/git-cheat-sheet-education.pdf'",
+            "Download Git: https://git-scm.com/downloads"
+        ]
+    },
+    {
+        "courseName": "Namaste Javascript",
+        "link": "https://www.youtube.com/playlist?list=PLxnjbfm5MCHFbRlyVCAqpJFdIzPN_IPID",
+        "chapters": 26,
+        "thumbnail": "https://i.ytimg.com/vi/78Homn79Qsk/maxresdefault.jpg",
+        "courseDescription": [
+            "Namaste Javascript Video tutorials will dive deep into JavaScript and the internals of how code is executed under the hood. If you understand the core fundamentals of JavaScript, it will help you become a better developer. You will exactly know how things are working and won't run into unexpected errors.",
+            "Namaste JavaScript Video Course will be 100% free and will be released on Youtube. The playlist will be updated with new JavaScript tutorial videos every week. The plan is to cover all the important concepts in JS including the tricky ones like Closures, Prototypal Inheritance, Promise, Event Loop.",
+            "Namaste JavaScript course videos will also focus on things that are asked in the interviews. So if you're preparing for a Frontend Developer Interview or Web Developer Interview. This will be the best place to get a good grasp of JS internals."
+        ]
+    },
+    {
+        "courseName": "Algorithms",
+        "link": "https://www.youtube.com/playlist?list=PLDN4rrl48XKpZkf03iYFl-O29szjTrs_O",
+        "chapters": 84,
+        "thumbnail": "https://i.ytimg.com/vi/0IAPZzGSbME/maxresdefault.jpg",
+        "courseDescription": [
+            "Abdul Bari's 'Algorithms' is a comprehensive YouTube playlist designed to guide learners through the complex world of algorithms. The course covers a wide range of topics, from basic algorithmic concepts to advanced data structures and algorithms. ",
+            "Clear explanations and practical examples make this course an excellent resource for both beginners and experienced programmers looking to deepen their understanding of algorithms."
+        ]
+    },
+    {
+        "courseName": "Web Authentication Methods",
+        "link": "https://www.youtube.com/watch?v=LB_lBMWH4-s",
+        "chapters": 1,
+        "thumbnail": "https://i.ytimg.com/vi/LB_lBMWH4-s/maxresdefault.jpg",
+        "courseDescription": [
+            "How does Authentication on the Web work? And what types of Authentication are available to Web Developers? In this video, we are going to explore methods such as Web Authentication API aka WebAuthn, Multi-Factor Authentication, Authentication with JWT or Cookies, Passwordless Authentication, and so on with thorough explanations.",
+            "Types of Authentication",
+            "Cookies",
+            " JWT",
+            " Single Sign-On",
+            " Multi-Factor Authentication",
+            " Passwordless Authentication",
+            " Biometric with Web Authentication API (WebAuthn)",
+            " Frontegg"
+        ]
+    },
+    {
+        "courseName": "Token vs Session Authentication",
+        "link": "https://www.youtube.com/watch?v=QzntvHz23tw",
+        "chapters": 1,
+        "thumbnail": "https://i.ytimg.com/vi/QzntvHz23tw/maxresdefault.jpg",
+        "courseDescription": [
+            "'Token vs Session Authentication' is a comparison of two popular methods used for maintaining user state in web applications.",
+            "Session-based authentication is a stateful method where the server creates and stores the session data in the server memory whenever a user logs in. The server then sends a session ID to the client's browser, which is stored as a cookie. For subsequent requests, the server validates the session ID and provides access if the session is valid.",
+            "Token-based authentication, on the other hand, is stateless. When a user logs in, the server generates a token (usually a JSON Web Token, or JWT) that is sent back to the client. This token contains enough data to identify a particular user and validate their access. The client stores this token and sends it along with every subsequent request. The server then validates the token and provides access if the token is valid.",
+            "Token-based authentication is generally considered more scalable because it doesn't require the server to store session data. However, it requires more processing on the server side to validate the tokens. Session-based authentication can be simpler to implement, but it can become less efficient as the number of users increases."
+        ]
+    },
+    {
+        "courseName": "Right way to code",
+        "link": "https://www.youtube.com/watch?v=8L5kVBays24",
+        "chapters": 1,
+        "thumbnail": "https://i.ytimg.com/vi/8L5kVBays24/maxresdefault.jpg",
+        "courseDescription": [
+            "The 'Right Way to Code' is about adopting best practices in programming and avoiding the trap of 'tutorial hell'. Tutorial hell refers to the situation where a learner gets stuck in a cycle of only following tutorials, without ever applying the knowledge to their own projects or problems.",
+            "The right way to code involves understanding the fundamentals of programming, practicing problem-solving, and writing lots of code. It's important to not just passively follow along with tutorials, but to actively engage with the material, experiment with the code, and try to build your own projects.",
+            "Additionally, it's crucial to understand that it's okay to not know everything. Coding is a continuous learning process. The key is to be comfortable with being uncomfortable, and to learn how to find solutions to problems you haven't encountered before. This involves knowing how to effectively use resources like documentation, Stack Overflow, and Google."
+        ]
+    }
+]

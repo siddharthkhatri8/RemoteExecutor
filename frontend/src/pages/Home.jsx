@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import Courses from "../components/Courses";
+import Courses from "../components/Courses.jsx";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { BASE_URL } from "../constants.js";
